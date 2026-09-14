@@ -64,6 +64,15 @@ DQJQ = "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke"
 
 # Handover §3: batch 10–20, không vượt 20 khi RPC nóng.
 PARSE_BUDGET = int(os.environ.get("BP_PARSE_BUDGET", "20"))
+# Nhip dat lenh cua BYJu do duoc ~15.8 lenh/gio. Mot batch 20/gio chi hon
+# duoc ~4/gio nen backlog khong bao gio vo. Chay nhieu batch moi run,
+# batch size van <= 20 dung rule handover §3, throttle giua cac batch.
+PARSE_BATCHES = int(os.environ.get("BP_PARSE_BATCHES", "8"))
+# Chan pham vi di lui. Handover §6.2: campaign historical co 5.893 BUY va
+# aggregate cua no DA CO (1.540.357,91 BP / VWAP 0,4617). Khong parse lai.
+# Can lay tu sau sweep 2 (Sep-8) tro di: do la campaign Sep-13/14 va cac
+# giao dich funding lien quan — dung hai open edge con mo.
+CAMPAIGN_FROM = os.environ.get("BP_CAMPAIGN_FROM", "2026-09-08T00:00:00Z")
 # Còn ít hơn ngần này thì đi lấy thêm trang cũ hơn.
 PENDING_LOW_WATER = 40
 
@@ -248,6 +257,8 @@ def main():
     run = {
         "started_utc": utcnow(),
         "mcp_url": MCP_URL,
+        "campaign_from": CAMPAIGN_FROM,
+        "parse_batches": PARSE_BATCHES,
         "user_agent": USER_AGENT,
         "client_key_set": bool(CLIENT_KEY),
         "handshake": None,
@@ -360,7 +371,6 @@ def main():
     if (
         ok
         and not led.get("older_exhausted")
-        and len(led["pending"]) < PENDING_LOW_WATER
         and led.get("cursor_older")
     ):
         ok2, res2 = call_tool(
@@ -368,6 +378,7 @@ def main():
             {
                 "address": BYJU,
                 "before": led["cursor_older"],
+                "fromTime": CAMPAIGN_FROM,
                 "pageSize": 100,
                 "maxPages": 1,
                 "maxReturned": 80,
@@ -402,13 +413,16 @@ def main():
         step("byju_index_older", ok2, f"{len(older_new)} mới")
 
     # 7. parse batch — cũ nhất trước ----------------------------------------
-    batch = led["pending"][-PARSE_BUDGET:] if led["pending"] else []
-    if batch:
+    total_parsed = 0
+    for bi in range(PARSE_BATCHES):
+        batch = led["pending"][-PARSE_BUDGET:] if led["pending"] else []
+        if not batch:
+            break
         ok3, res3 = call_tool(
             "get_bp_transactions_by_signatures",
             {"address": BYJU, "signatures": batch},
         )
-        stamp = utcnow().replace(":", "").replace("-", "")
+        stamp = utcnow().replace(":", "").replace("-", "") + f"-{bi}"
         (OUT_PARSED / f"{stamp}.json").write_text(
             json.dumps(
                 {
@@ -423,19 +437,27 @@ def main():
         )
         if ok3:
             # chỉ chuyển sang parsed khi call thành công; fail thì giữ pending
-            led["pending"] = [s for s in led["pending"] if s not in set(batch)]
+            drop = set(batch)
+            led["pending"] = [s for s in led["pending"] if s not in drop]
             led["parsed"].extend(batch)
-            run["parsed_this_run"] = len(batch)
-            log(f"parse {len(batch)} sig → out/parsed/{stamp}.json")
+            total_parsed += len(batch)
+            log(f"parse batch {bi + 1}: {len(batch)} sig → out/parsed/{stamp}.json")
         else:
-            log(f"parse FAILED, giữ nguyên pending: {str(res3)[:200]}")
-        step("parse", ok3, f"{len(batch)} sig")
-    else:
-        step("parse", True, "pending rỗng")
+            log(f"parse batch {bi + 1} FAILED, giữ nguyên pending: {str(res3)[:200]}")
+            step("parse", False, f"batch {bi + 1} loi")
+            break
+        if _seen_429:
+            # handover §3: gap 429 thi dung, khong retry cascade trong cung run
+            log("gap 429 — dung parse, de run sau lam tiep")
+            break
+    run["parsed_this_run"] = total_parsed
+    if total_parsed or not led["pending"]:
+        step("parse", True, f"{total_parsed} sig")
 
     # 8. ghi ledger ----------------------------------------------------------
     led["runs"] = led.get("runs", 0) + 1
     led["last_run_utc"] = utcnow()
+    led.pop("last_error", None)  # run nay thanh cong -> xoa loi cu, tranh bao dong gia
     led["pending_count"] = len(led["pending"])
     led["parsed_count"] = len(led["parsed"])
     save_ledger(led)
