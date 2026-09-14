@@ -1,17 +1,69 @@
 {
-  "started_utc": "2026-09-14T08:30:32Z",
+  "started_utc": "2026-09-14T08:45:04Z",
   "mcp_url": "https://bp-market-mcp.playerpress.workers.dev/mcp",
+  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+  "client_key_set": false,
   "handshake": {
-    "ok": false,
+    "ok": true,
     "result": {
-      "transport_error": "HTTP 403",
-      "detail": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\"title\":\"Error 1010: Access denied\",\"status\":403,\"detail\":\"The site owner has blocked access based on your browser's signature.\",\"instance\":\"a3ae07bdcc7ed704\",\"error_code\":1010,\"error_name\":\"browser_signature_banned\",\"error_category\":\"access_denied\",\"ray_id\":\"a3ae07bdcc7ed704\",\"timestamp\":\"2026-09-14T08:30:32Z\",\"zone\":\"bp-market-mcp.playerpress.workers.dev\",\"cloudflare_error\":true,\"retryable\":false,\"owner_action_required\":true,\"what_you_should_do\":\"**Do not retry.** Your use"
+      "protocolVersion": "2024-11-05",
+      "capabilities": {
+        "tools": {
+          "listChanged": true
+        }
+      },
+      "serverInfo": {
+        "name": "BP Backpack Market + Forensics",
+        "version": "3.6.0"
+      }
     }
   },
-  "tools_available": null,
-  "steps": [],
-  "new_signatures": 0,
-  "parsed_this_run": 0,
+  "tools_available": [
+    "get_bp_health",
+    "get_bp_rpc_health",
+    "get_bp_self_test",
+    "get_bp_snapshot",
+    "get_bp_transactions_by_signatures",
+    "get_bp_wallet_forensics",
+    "get_bp_wallet_signature_index"
+  ],
+  "steps": [
+    {
+      "step": "tools/list",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "snapshot",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "rpc_health",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "dqjq_index",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "byju_index_new",
+      "ok": true,
+      "note": "81 mới"
+    },
+    {
+      "step": "parse",
+      "ok": true,
+      "note": "20 sig"
+    }
+  ],
+  "new_signatures": 81,
+  "parsed_this_run": 20,
   "saw_429": false,
-  "finished_utc": "2026-09-14T08:30:32Z"
+  "pending_count": 61,
+  "parsed_count": 20,
+  "older_exhausted": false,
+  "finished_utc": "2026-09-14T08:45:16Z"
 }

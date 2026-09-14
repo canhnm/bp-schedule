@@ -1,0 +1,211 @@
+{
+  "tools": [
+    {
+      "name": "get_bp_snapshot",
+      "title": "Get BP market snapshot",
+      "description": "Read the validated Backpack BP_USDC snapshot for the exact BP mint.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_bp_health",
+      "title": "Check BP backend health",
+      "description": "Diagnostic for the BP market backend.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_bp_self_test",
+      "title": "Run BP backend self-test",
+      "description": "Full Backpack API diagnostic.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_bp_rpc_health",
+      "title": "Probe Solana RPC fallback pool",
+      "description": "Check each configured/public Solana RPC endpoint independently. Useful after deploys or when wallet forensics hits 403/429/timeouts.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_bp_wallet_forensics",
+      "title": "Trace BP wallet buys, sells and transfers",
+      "description": "Direct Solana-RPC forensic trace for an exact wallet and exact BP mint. Scans owner plus current BP token accounts, batches getTransaction calls to bound Cloudflare subrequests, separates BUY/SELL from RECEIVE/SEND, derives stable execution prices, detects Jupiter/Raydium/Meteora, adds parsed BP-transfer counterparties for RECEIVE/SEND, exposes signature/parse diagnostics, and supports older-history pagination without skipping unprocessed batches.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "address": {
+            "default": "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke",
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 44
+          },
+          "limit": {
+            "default": 150,
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 500
+          },
+          "before": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 100
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_bp_wallet_signature_index",
+      "title": "Index BP wallet signatures quickly",
+      "description": "Fast first-stage history discovery for a BP wallet. Scans the owner plus current exact-BP token accounts with up to 1,000 signatures per RPC page, supports multi-page/date-bounded indexing, returns per-source cursors and daily counts, and intentionally makes no BUY/SELL inference.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "address": {
+            "default": "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke",
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 44
+          },
+          "pageSize": {
+            "default": 1000,
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 1000
+          },
+          "maxPages": {
+            "default": 3,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "before": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 100
+          },
+          "until": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 100
+          },
+          "fromTime": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          },
+          "toTime": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          },
+          "includeFailed": {
+            "default": false,
+            "type": "boolean"
+          },
+          "outputMode": {
+            "default": "summary",
+            "type": "string",
+            "enum": [
+              "summary",
+              "full"
+            ]
+          },
+          "maxReturned": {
+            "default": 500,
+            "type": "integer",
+            "minimum": 20,
+            "maximum": 5000
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_bp_transactions_by_signatures",
+      "title": "Parse selected BP transactions",
+      "description": "Second-stage selective parser for exact Solana signatures. Fetches only requested transactions in small batches and applies the same strict BP BUY/SELL/RECEIVE/SEND semantics as wallet forensics. Pair with get_bp_wallet_signature_index for deep history.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "address": {
+            "default": "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke",
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 44
+          },
+          "signatures": {
+            "minItems": 1,
+            "maxItems": 200,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 64,
+              "maxLength": 100
+            }
+          }
+        },
+        "required": [
+          "signatures"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    }
+  ]
+}
