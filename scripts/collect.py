@@ -247,6 +247,74 @@ def save_ledger(led):
 
 # --------------------------------------------------------------------------
 
+
+def build_aggregate():
+    """Tinh aggregate tu out/parsed/ va ghi ra out/aggregate.json.
+
+    Ly do: phia phan tich khong the doc lai 266KB+ raw moi gio — chi phi tang
+    theo thoi gian va se pha vo ngan sach context. Collector tinh mot lan, ghi
+    file nho. Raw van giu nguyen trong repo de kiem chung lai bat cu luc nao.
+
+    Day chi la CONG DON, khong phai phan loai: action lay nguyen tu parser.
+    VWAP = sum(quoteAmount) / sum(bpDelta), KHONG lay trung binh cac gia le.
+    LUU Y: quoteAmount cua parser DA GOM phi thuc thi ~0.25%, nen VWAP o day la
+    gia GOP PHI.
+    """
+    seen = {}
+    files = 0
+    for f in sorted(OUT_PARSED.glob("*.json")):
+        files += 1
+        try:
+            raw = json.loads(f.read_text())
+        except Exception:
+            continue
+        payload = unwrap(raw.get("result"))
+        if not isinstance(payload, dict):
+            continue
+        for ev in payload.get("events", []) or []:
+            sig = ev.get("signature")
+            if sig and sig not in seen:   # dedupe: cac file co the chong lap
+                seen[sig] = ev
+
+    counts, venues = {}, {}
+    bp_sum = 0.0
+    quote_sum = 0.0
+    prices, times = [], []
+    for ev in seen.values():
+        act = ev.get("action", "UNKNOWN")
+        counts[act] = counts.get(act, 0) + 1
+        if ev.get("timestamp"):
+            times.append(ev["timestamp"])
+        if act != "BUY":
+            continue
+        bp = ev.get("bpDelta")
+        q = ev.get("quoteAmount")
+        if isinstance(bp, (int, float)) and isinstance(q, (int, float)) and bp > 0:
+            bp_sum += bp
+            quote_sum += q
+            prices.append(q / bp)
+        for v in ev.get("venueHints", []) or []:
+            venues[v] = venues.get(v, 0) + 1
+
+    return {
+        "computed_utc": utcnow(),
+        "source_files": files,
+        "unique_signatures": len(seen),
+        "action_counts": counts,
+        "buy": {
+            "count": counts.get("BUY", 0),
+            "bp_total": repr(bp_sum),
+            "usdc_total": repr(quote_sum),
+            "vwap_gop_phi": repr(quote_sum / bp_sum) if bp_sum else None,
+            "price_min": repr(min(prices)) if prices else None,
+            "price_max": repr(max(prices)) if prices else None,
+        },
+        "sell": {"count": counts.get("SELL", 0)},
+        "venue_hits": venues,
+        "window": {"oldest": min(times) if times else None, "newest": max(times) if times else None},
+        "caveat": "VWAP GOP PHI (~0.25% phi thuc thi nam trong quoteAmount). Chua chac phu het campaign neu older_exhausted=false.",
+    }
+
 def main():
     OUT_LATEST.mkdir(parents=True, exist_ok=True)
     OUT_PARSED.mkdir(parents=True, exist_ok=True)
@@ -380,8 +448,8 @@ def main():
                 "before": led["cursor_older"],
                 "fromTime": CAMPAIGN_FROM,
                 "pageSize": 100,
-                "maxPages": 1,
-                "maxReturned": 80,
+                "maxPages": 2,
+                "maxReturned": 160,
                 "outputMode": "full",
                 "includeFailed": False,
             },
@@ -463,6 +531,15 @@ def main():
     save_ledger(led)
 
     run["new_signatures"] = len(new_sigs)
+    try:
+        agg = build_aggregate()
+        (ROOT / "out" / "aggregate.json").write_text(json.dumps(agg, indent=2, ensure_ascii=False))
+        run["aggregate"] = {"unique_signatures": agg["unique_signatures"], "buy": agg["buy"]["count"], "sell": agg["sell"]["count"]}
+        log(f"aggregate: {agg['unique_signatures']} sig, {agg['buy']['count']} BUY, {agg['sell']['count']} SELL")
+    except Exception as e:
+        run["aggregate"] = {"error": str(e)[:300]}
+        log(f"aggregate that bai: {e}")
+
     run["saw_429"] = _seen_429
     run["pending_count"] = len(led["pending"])
     run["parsed_count"] = len(led["parsed"])
