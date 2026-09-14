@@ -151,5 +151,56 @@
     "dqjq_usdc": "Gau37ZyfXMG3A55zvt2K75izqYusTB4RisWuZRvAjsRD",
     "byju_usdc": "3hAQMadipKixDM8PH86NqN7L6xF4ZQkyro93tAV97UGg",
     "cgjmox_usdc": "98U3uhwhA8RftLfURi8C5WthK6m3Pqvb8pNFJStV94YU"
+  },
+  "evidence_hierarchy_v2": {
+    "_replaces": "§16 cua handover, xep sai thu bac: no de 'tx parsed by BP MCP' tren 'Helius'. Thuc te Worker CHAY TREN Helius (moi response deu ghi rpcEndpoint=mainnet.helius-rpc.com). MCP la lop phai sinh, khong phai nguon.",
+    "1_bang_chung": "Helius Enhanced Transactions API (GET, qua WebFetch). Chan transfer, route, tai khoan phi, counterparty. Dung de KHAM PHA va lam trong tai khi bat dong.",
+    "2_phan_loai": "BP MCP parser. BUY/SELL/RECEIVE/SEND theo ngu nghia chat, dedupe §3D, VWAP. Giu vi TAT DINH — cung input luon ra cung output. Khong tu phan loai ad hoc tu chan transfer tho, ket luan se troi giua cac luot.",
+    "3_thu_cap": "wallet analytics, holder pages, DexScreener. Co caveat, khong dung mot minh.",
+    "_kiem_tra_bat_buoc": "Voi so lay qua WebFetch (co lop tom tat): bat cac chan transfer cong lai phai khop so rong. Vi du da kiem: 172.126664519 + 20.009756641 + 7.94911209 = 200.085533250. Lech la biet so bi hong, khong can nguon thu hai.",
+    "_bai_hoc": "Hom nay lop phai sinh lam mat du lieu HAI lan: vut sach giao dich NO_BP_DELTA (giau toan bo dong funding), va gop chan phi vao usdcDelta (moi VWAP cao hon thuc ~0.25%)."
+  },
+  "fee_account": {
+    "address": "Ggp9SGTqAKiJWRXeyEb2gEVdmD6n7fgHD7t4s8DrAqwf",
+    "_note": "Nhan phi thuc thi tren MOI lenh swap cua BYJu. Khong co trong handover.",
+    "rate_do_duoc": [
+      "0.2598% (09:54:02Z, phi 0.281108 / von 108.185536)",
+      "0.2547% (09:57:35Z, phi 0.258052 / von 101.329138)"
+    ],
+    "_lead": "Nhieu kha nang la tai khoan phi cua dich vu thuc thi (Definitive). Lan theo no co the dinh danh dich vu — manh moi gan nhat toi cau hoi beneficial owner."
+  },
+  "vwap_correction": {
+    "_canh_bao": "MCP tinh impliedBpPrice tu tong usdcDelta cua vi, ma tong do DA GOM phi thuc thi ~0.25%. Nen MOI VWAP ghi trong file nay va trong handover la GIA GOP PHI, cao hon gia khop that khoang 0.25%.",
+    "_he_qua": "Khi so VWAP cua BYJu voi gia thi truong phai tru khoan nay, neu khong se ket luan sai la no mua dat hon thi truong."
+  },
+  "price_progression": {
+    "_note": "Gia gop phi tru khi ghi ro 'thuan'. Tran ~0.4999743 trong handover da vo.",
+    "13/09 23:47-00:59": "0.4984671",
+    "14/09 03:43-04:55": "0.4991524",
+    "14/09 08:37-09:12": "0.5009465",
+    "14/09 09:54:02": "0.5010308 (thuan)",
+    "14/09 09:57:35": "0.5064291 (thuan)"
+  },
+  "cgjmox_passthrough": {
+    "_at": "2026-09-08/09, qua ATA USDC 98U3uhwhA8RftLfURi8C5WthK6m3Pqvb8pNFJStV94YU",
+    "_ket_luan": "CgjmoX KHONG phai kho von — la tram trung chuyen. Vao 594,752.7131 / Ra 591,460.9265 trong 26 gio, con lai 3,291.79.",
+    "inflow_lon": "500,000 USDC luc 08/09 19:53:29Z tu yyf75GsQpfei... — BON TIENG RUOI sau sweep 2 (15:12).",
+    "node_moi": "6rzMxHRF1nu3nZ6hpAP48H6MVH6zSuyAAJP8MXJNE8mz nhan 574,753.0165 USDC qua 4 lan trong 20 gio. Lon hon moi khoan trong handover. Quan he voi BP: UNPROVEN.",
+    "ho_dia_chi_theo_tien_to": {
+      "_phat_hien": "Moi transfer that deu kem probe 0.0001/0.001 USDC tu dia chi TRUNG 4 KY TU DAU, thuong trung ca 4 ky tu cuoi. Day la vanity keypair duoc grind theo ho.",
+      "cap_da_xac_nhan": [
+        "DuEHFEKmVRD4...GwLN / DuEHGznYW3i6...GwLN",
+        "yyf75GsQpfei...FgfZ / yyf7gAsTyUR5...FgfZ",
+        "E67GiAuoepHu...63bW / E67GhQRyCH4q...K3bW",
+        "5opd5KBmodmo...EUP9 / 5opdxjdyN1aK...EUP9",
+        "CgjmoXmBrFAg...Tbsx / Cgjm6Kne928v...Tbsx (da co trong handover §7.5 ma chua nhan ra quy luat)"
+      ],
+      "_gia_tri": "4 ky tu dau thanh dau van tay nhan dien dia chi cung chu. Cong cu handover chua co."
+    },
+    "_chua_giai_thich": "09/09 21:37:47Z CgjmoX +19,999.7031 nhung counterparty 5tzFkiKscXHK... -20,412.4031, lech 412.70. Giao dich nhieu nhanh hoac co phi. Chua parse sau."
+  },
+  "research_sources": {
+    "helius_enhanced_tx": "https://api.helius.xyz/v0/addresses/{address}/transactions?api-key=...  GET, goi duoc qua WebFetch -> RE chay duoc KHONG CAN bat desktop. Key nghien cuu free, khac key production trong Cloudflare Worker secret.",
+    "_luu_y": "GET-only va di qua lop tom tat. Voi so can chinh xac tuyet doi thi ap dung kiem tra cong-chan-khop-so-rong, hoac doi chieu bang MCP."
   }
 }
