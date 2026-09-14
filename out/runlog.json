@@ -1,11 +1,11 @@
 {
-  "started_utc": "2026-09-14T08:25:37Z",
+  "started_utc": "2026-09-14T08:30:32Z",
   "mcp_url": "https://bp-market-mcp.playerpress.workers.dev/mcp",
   "handshake": {
     "ok": false,
     "result": {
       "transport_error": "HTTP 403",
-      "detail": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\"title\":\"Error 1010: Access denied\",\"status\":403,\"detail\":\"The site owner has blocked access based on your browser's signature.\",\"instance\":\"a3ae008ceabdb1ef\",\"error_code\":1010,\"error_name\":\"browser_signature_banned\",\"error_category\":\"access_denied\",\"ray_id\":\"a3ae008ceabdb1ef\",\"timestamp\":\"2026-09-14T08:25:38Z\",\"zone\":\"bp-market-mcp.playerpress.workers.dev\",\"cloudflare_error\":true,\"retryable\":false,\"owner_action_required\":true,\"what_you_should_do\":\"**Do not retry.** Your use"
+      "detail": "{\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\"title\":\"Error 1010: Access denied\",\"status\":403,\"detail\":\"The site owner has blocked access based on your browser's signature.\",\"instance\":\"a3ae07bdcc7ed704\",\"error_code\":1010,\"error_name\":\"browser_signature_banned\",\"error_category\":\"access_denied\",\"ray_id\":\"a3ae07bdcc7ed704\",\"timestamp\":\"2026-09-14T08:30:32Z\",\"zone\":\"bp-market-mcp.playerpress.workers.dev\",\"cloudflare_error\":true,\"retryable\":false,\"owner_action_required\":true,\"what_you_should_do\":\"**Do not retry.** Your use"
     }
   },
   "tools_available": null,
@@ -13,5 +13,5 @@
   "new_signatures": 0,
   "parsed_this_run": 0,
   "saw_429": false,
-  "finished_utc": "2026-09-14T08:25:38Z"
+  "finished_utc": "2026-09-14T08:30:32Z"
 }
