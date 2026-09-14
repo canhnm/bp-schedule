@@ -146,7 +146,42 @@
     "return_leg_evidence": "25/08 Dqjq->CgjmoX 40,824,094.42989554 DUPE; 22/08 Dqjq->CgjmoX 25,000.00281 USDC (handover §7.3); 07/09 08:10:31Z Dqjq->CgjmoX 4,341,254.257911 mint E1kvzJNx...",
     "confidence": "Quan he van hanh CgjmoX->Dqjq: HIGH, co huong ro rang (von xuong, token len). Beneficial owner van UNKNOWN — day la dong von thuc su hai chieu, KHAC HAN lap luan gas-distributor ma §7.5 canh bao khong chung minh duoc so huu.",
     "_how_found": "Suy ra dia chi ATA USDC bang ProgramDerivedAddress roi index thang ATA do, thay vi index owner. Cong thuc da tu kiem chung: suy ra dung ca hai BP ATA da biet (Dqjq -> GnyjGeX3..., BYJu -> AJviiPsR...).",
-    "next_lead": "ATA USDC cua CgjmoX = 98U3uhwhA8RftLfURi8C5WthK6m3Pqvb8pNFJStV94YU chi co 65 chu ky tu 01/08 (12 ngay co hoat dong) — DAY la so cai von, tra cuu duoc het. Trai lai ATA USDC cua BYJu co >5.000 chu ky chi trong 28-31/08 vi moi swap deu cham vao no, khong kinh te de truy. Dang chu y: 08/09 co 9 va 09/09 co 11 giao dich, ngay SAU sweep 2."
+    "next_lead": "ATA USDC cua CgjmoX = 98U3uhwhA8RftLfURi8C5WthK6m3Pqvb8pNFJStV94YU chi co 65 chu ky tu 01/08 (12 ngay co hoat dong) — DAY la so cai von, tra cuu duoc het. Trai lai ATA USDC cua BYJu co >5.000 chu ky chi trong 28-31/08 vi moi swap deu cham vao no, khong kinh te de truy. Dang chu y: 08/09 co 9 va 09/09 co 11 giao dich, ngay SAU sweep 2.",
+    "mat_xich_truoc_sweep_DA_NOI": {
+      "chuoi": [
+        {
+          "utc": "2026-08-17T15:25:27Z",
+          "from": "2AQdpHJ2JpcEgPiATUXjQxA8QmafFegfQwSLWSprPicm",
+          "to": "CgjmoX",
+          "usdc": "150000"
+        },
+        {
+          "utc": "2026-08-17T15:26:00Z",
+          "from": "CgjmoX",
+          "to": "Dqjq",
+          "usdc": "150000",
+          "sig": "5DcZePAFe1bUj7KmaNUcRTcqACAASCygNDZYiLJLGzYvRt17g2L3Fyq6CUivsZMwjKahUBH7HTiVnMsWERGyaNVx"
+        },
+        {
+          "utc": "2026-08-17T15:27:15Z",
+          "from": "Dqjq",
+          "to": "BYJu",
+          "usdc": "125000",
+          "sig": "3FxtMpFCiv9Yi4GWpjUHgaYCEP9ScQDbjDKDwDkzGhCPLGPur76S26wS9KS1MsQwRvCzJBMa3B1yxkhdEdpUh2Jy"
+        }
+      ],
+      "_thoi_gian": "1 phut 48 giay tu nguon ngoai toi executor.",
+      "_khop_so": "Dqjq giu lai 25,000.00161; dung khoan du do la 25,000.00281 chuyen nguoc ve CgjmoX ngay 22/08 ma §7.3 ghi nhan. Vong khep kin.",
+      "_y_nghia": "Xac nhan von mua BP TRUOC sweep 31/08 di theo dung chuoi CgjmoX -> Dqjq -> BYJu."
+    },
+    "tong_von_BP_da_verify": {
+      "17/08 Dqjq->BYJu": "125000",
+      "07/09 Dqjq->BYJu": "249999.7022",
+      "tong_khong_tinh_25/08": "374999.7022",
+      "gap_con_lai": "336212.9496919955",
+      "25/08 Dqjq->BYJu": "250000.0011 (di vao DUPE, khong phai BP)",
+      "_luu_y": "Sweep 31/08 mot minh da ~$264K o VWAP 0.4617, ma von truoc do moi tim duoc 125K => con thieu ~$139K TRUOC 17/08. Phai lui tiep so cai CgjmoX truoc 11/08, hoac tim nguoi cap von khac cho BYJu."
+    }
   },
   "derived_ata": {
     "_note": "Suy ra bang ProgramDerivedAddress, da kiem chung voi hai BP ATA on-chain.",
@@ -205,7 +240,24 @@
         "5opd5KBmodmo...EUP9 / 5opdxjdyN1aK...EUP9",
         "CgjmoXmBrFAg...Tbsx / Cgjm6Kne928v...Tbsx (da co trong handover §7.5 ma chua nhan ra quy luat)"
       ],
-      "_gia_tri": "4 ky tu dau thanh dau van tay nhan dien dia chi cung chu. Cong cu handover chua co."
+      "_gia_tri": "4 ky tu dau thanh dau van tay nhan dien dia chi cung chu. Cong cu handover chua co.",
+      "phu_toan_mang_luoi": {
+        "CgjmoXmBrFAg...Tbsx": [
+          "Cgjm6Kne928v...Tbsx",
+          "Cgjm1Wo91oiK...Vjsx"
+        ],
+        "DqjqYnihbh64...6Kke": [
+          "Dqjq1YKBLtpP...6Kke"
+        ],
+        "BYJuT6vQwqxd...tmV9": [
+          "BYJ1MSVuxTYs...BmV9",
+          "BY12b7yVqcL3...5mV9"
+        ],
+        "2rfCzn2UBVVb...vxXq": [
+          "2rf1ZatJ2LEa...2hXq"
+        ],
+        "_ket_luan": "MOI vi chinh trong mang luoi deu co vi anh em vanity dung de probe truoc khi chuyen tien. Quy uoc van hanh, khong phai trung hop."
+      }
     },
     "_chua_giai_thich": "09/09 21:37:47Z CgjmoX +19,999.7031 nhung counterparty 5tzFkiKscXHK... -20,412.4031, lech 412.70. Giao dich nhieu nhanh hoac co phi. Chua parse sau."
   },
