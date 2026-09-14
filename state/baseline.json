@@ -2,11 +2,9 @@
   "_source": "BP_RE_FULL_HANDOVER_2026-09-14 v2",
   "_role": "Hằng số tĩnh từ handover. Collector KHÔNG ghi file này. Claude đọc để có checkpoint. Người sửa tay khi handover đổi.",
   "_rule": "UNKNOWN không bao giờ thành fact. Balance delta không tự động là BUY/SELL. Số DERIVED phải giữ nhãn DERIVED.",
-
   "mint": "BPxxfRCXkUVhig4HS1Lh7kZqV6SPJhzfEk4x6fVBjPCy",
   "market": "BP_USDC",
   "position_entry_usd": "0.50433",
-
   "cluster": {
     "byju": "BYJuT6vQwqxdjF8yZbV4zbTc6RV4dPgRQTGBCr3ctmV9",
     "byju_bp_ata": "AJviiPsRgfKH2Rz88sxgJAFF2kr1T72jaaH4tMH6sKuM",
@@ -17,9 +15,12 @@
     "sweep_1_bp": "571858.355685697",
     "sweep_2_bp": "647410.242013362",
     "sweep_sum_bp": "1219268.597699059",
-    "_invariant_I1": "dqjq_balance phải == sweep_sum. Lớn hơn = sweep mới. NHỎ HƠN = BP outbound, nghiêm trọng nhất."
+    "_invariant_I1": "dqjq_balance phải == sweep_sum. Lớn hơn = sweep mới. NHỎ HƠN = BP outbound, nghiêm trọng nhất.",
+    "byju_balance_bp_live": "388833.331964364",
+    "cluster_bp_live": "1608101.929663423",
+    "_live_at": "2026-09-14T09:12:00Z",
+    "_invariant_I1_verified": "2026-09-14T09:12Z: Dqjq = 1219268.597699059 == tong sweep, lech 0. Quet 1002 raw signature tu 08/09, dedupe con 1 (chinh sweep 2). Dqjq bat dong ve BP."
   },
-
   "campaign_sep13_14": {
     "parsed_confirmed_buy_at_handover": 140,
     "parsed_confirmed_sell_at_handover": 0,
@@ -31,16 +32,16 @@
       "price_min": "0.4967347428072599",
       "price_max": "0.4999743112751785"
     },
-    "_derived_convergence_target_bp": "54062.7840171278",
-    "_derived_note": "HYPOTHESIS. Giả định BYJu không có BP trước campaign historical và không có RECEIVE/SEND BP khác sau sweep Sep-8. Chưa verify."
+    "_derived_convergence_target_bp": "67744.0162771088",
+    "_derived_note": "HYPOTHESIS, cap nhat 2026-09-14T09:12Z. Gia dinh BYJu khong co BP truoc campaign historical va khong co RECEIVE/SEND BP khac sau sweep 08/09. Chua verify.",
+    "_price_ceiling_broken": "Handover ghi tran ~0.4999743. Da vo: batch 08:37-09:12Z co VWAP 0.5009465, tran 0.5026294. VWAP theo cua so: 0.4984671 (13/09 23:47) -> 0.4991524 (14/09 03:43) -> 0.5009465 (14/09 08:37).",
+    "_cadence": "3.76-3.81 phut/lenh, on dinh. 68 signature tu 04:55:54Z den 09:12:00Z."
   },
-
   "historical_campaign": {
     "bp_bought": "1540357.9133863142",
     "usdc_spent": "711212.6518919955",
     "vwap": "0.4617190886035503"
   },
-
   "excluded_from_whale_concentration": {
     "GySFHFS5ZiN4Z5YnyPZcjjxpYcGvD7qHZYVjE9QzMHVH": "reserve/system ~750M, mint+freeze authority",
     "EyzzXxQcR7NicVhMvHZy5DAeoCrxpCoY11pRneuysJiS": "staking/escrow",
@@ -48,12 +49,10 @@
     "6qz7THwQvcjF3HyDGLuKaLBUk6EyJKeZXZMWLAeiwfjd": "Meteora BP/USDC LP",
     "ASTyfSima4LLAdDgoFGkgqoKowG1LZFDr9fAQrg7iaJZ": "MEXC omnibus — BP vào = possible sell-risk, chưa phải verified sale"
   },
-
   "p0_smart_money": {
     "8hH2SVbSDTrvqExVNLxQCp32VasEkqYAoaprWCioGZA1": "~720,000.178 BP. Cụm số PnL wallet-analytics KHÔNG reconcile nội bộ — SOURCE-REPORTED, cấm derive cost basis.",
     "BA4kkLs7cAzBGcTt6cngEjfbFAg9HeFLPgfDmRjmyqxq": "~194,919.512 BP, 7 buys / 0 sells, avg $0.27455. Số học reconcile trong 0.16%."
   },
-
   "supply": {
     "circulating": "250M",
     "gysf_reserve": "750M",
@@ -61,11 +60,63 @@
     "active_stake_pct": "61.6",
     "pre_ipo_pool_375M": "UNKNOWN scope — không khớp cấu trúc 250M+750M, chưa có định nghĩa nguồn, KHÔNG dùng trong tính dilution"
   },
-
   "open_edges": [
-    "Funding gap: campaign historical chi 711,212.65 USDC nhưng chỉ ~250K–500K funding USDC vào BYJu được ghi nhận. Thiếu tối thiểu $211K. Chưa đóng thì không phát biểu về nguồn vốn hay beneficial owner.",
-    "get_bp_health / get_bp_self_test chưa xác minh tồn tại — xem out/latest/_tools.json.",
-    "Whale queue P1/P2 không có timestamp quan sát.",
-    "D7BgNq chưa có full address; một cache cho ~1.8M BP, sẽ là holder phi hệ thống lớn nhất nếu đúng."
-  ]
+    "Ai cap von cho BYJu mua BP TRUOC sweep 31/08? Von Dqjq da biet khong giai thich duoc. Xem funding_verified_onchain.sharpest_open_question.",
+    "Nguon 250,000 USDC chay vao Dqjq ngay 25/08 giua 09:20:34 va 11:28:42 — chua co chu ky, can index ATA USDC (extraMints).",
+    "Mint E1kvzJNxShvvWTrudokpzuc789vRiDXfXG3duCuY6ooE: 07/09 08:10:31Z Dqjq chuyen 4,341,254.257911 sang CgjmoX, muoi tieng truoc khi cap von BP. Khong co trong handover. Chua xac dinh token gi.",
+    "D7BgNq: UNRESOLVED_TRANSIENT, confidence LOW. Historical transient holder candidate (~1.8M BP), full address CHUA duoc chung minh va da bien mat khoi holder snapshot hien tai. KHONG dua vao P1/P2, KHONG tinh nhu whale doc lap. Muon resolve phai lay historical holder snapshot hoac lan theo token-transfer records tai thoi diem snapshot. TUYET DOI khong tu hoan thien dia chi tu prefix.",
+    "Whale queue P1/P2 khong co timestamp quan sat.",
+    "375M pre-IPO pool chua co dinh nghia nguon. UNKNOWN scope."
+  ],
+  "_revision": "v2 — 2026-09-14, bo sung ket qua RE truc tiep qua MCP",
+  "funding_verified_onchain": {
+    "_verified_at": "2026-09-14, qua get_bp_transactions_by_signatures sau khi va parser",
+    "_note": "Lan dau §7.2 duoc verify bang on-chain thay vi wallet analytics. Ba con so khop toi chu so cuoi.",
+    "dqjq_to_byju_usdc": [
+      {
+        "utc": "2026-08-25T11:31:37Z",
+        "amount": "250000.0011",
+        "sig": "Ex3117tpatSojrh3BzWHqCiM6F8FkTvE2kVqnkU2W2UPFWDpDS75T4mpyWWbWq5oWdxaVFzsiTeJ8duJmHsh3kh"
+      },
+      {
+        "utc": "2026-09-07T18:01:06Z",
+        "amount": "10",
+        "sig": "2JqfQJKBSXs2tWasR9ZtNmzC79pHiv1ngnLLX4i7y4hLQEvN4MD57aMqKsgcSnoQiaA11KRGs1JW1DrQ8QvLKQBm",
+        "note": "chuyen thu"
+      },
+      {
+        "utc": "2026-09-07T18:05:06Z",
+        "amount": "249989.7022",
+        "sig": "3kmPSN4DJ89bn7wxD5eKKLyFvC1HBPE1Xj6TmVhv7ViFkqL2vvKmkc4LSHSSbpsof9JiQuaLjqbD8ud3oXSR58kG"
+      }
+    ],
+    "total_usdc_dqjq_to_byju": "499999.7033",
+    "operational_pattern": "Ca hai lan deu: probe 0.0001 USDC -> probe 0.001 USDC tu Cgjm6Kne928vvPhswpJfn492niA9Low7A8tfiihUTbsx -> chuyen thu 10 USDC -> chuyen 250K. Xac nhan §7.5: Cgjm6Kne la vi probe, khong phai capital funding.",
+    "aug25_likely_not_bp_capital": "25/08 11:31 Dqjq->BYJu 250K USDC; 14:37 BYJu->Dqjq 40,824,036.49614076 DUPE (mint fRfKGCriduzDwSudCwpL7ySCEiboNuryhZDVJtr1a1C); 15:01 Dqjq->CgjmoX 40,824,094.42989554 DUPE. Cong khop tuyet doi voi 57.933754782 DUPE Dqjq co san. => 250K ngay 25/08 di vao DUPE, khong phai BP.",
+    "gap_if_aug25_counted": "211212.9485919955",
+    "gap_if_aug25_is_dupe": "461212.9496919955",
+    "sharpest_open_question": "Sweep BP dau tien la 31/08 (571,858.355685697 BP) — TRUOC khoan cap von 07/09. So BP do mua bang von nao? Khong phai tien Dqjq da biet. Ai cap von cho BYJu mua BP truoc 31/08?"
+  },
+  "tooling_blind_spots": {
+    "stable_inflow_invisible": "get_bp_wallet_signature_index chi quet owner + BP token account. Dong stablecoin vao ATA USDC KHONG duoc index. Bang chung: so du USDC cua Dqjq ngay 25/08 di tu 0.001 (09:20:34) len 250000.001 (11:28:42) — +250,000 USDC vao ma khong co chu ky nao trong 11 giao dich duoc index. Da va: them tham so extraMints cho index (chua deploy tai thoi diem ghi).",
+    "no_bp_delta_was_empty": "DA SUA 2026-09-14. Truoc do parser tra {signature, action:NO_BP_DELTA} va vut het token delta, timestamp, counterparty — khien §9 stable-capital intent khong co du lieu de chay. Nay tra tokenDeltas (moi mint), counterparties, timestamp, nativeSolDelta, venueHints.",
+    "cex_vs_dex_khong_cong_tru": "executedFlow trong snapshot lay tu api.backpack.exchange = so khop lenh CEX. BYJu mua tren DEX Solana. Lenh BYJu KHONG xuat hien trong tape do. Khong duoc so sanh ty trong giua hai ben."
+  },
+  "source_caveats": {
+    "dexscreener": "KHONG DUNG CHO GIA BP. 2026-09-14 bao priceUsd ~0.3809 cho dung exact mint va dung pool Meteora 6qz7THw..., trong khi CEX bao 0.49881 va token delta on-chain cua BYJu cho 0.4993-0.5026. Lech -24%.",
+    "wallet_analytics": "Cum so PnL vi 8hH2 khong reconcile noi bo — SOURCE-REPORTED, cam derive cost basis."
+  },
+  "worker_tools_confirmed": {
+    "_at": "2026-09-14T08:45Z",
+    "tools": [
+      "get_bp_health",
+      "get_bp_rpc_health",
+      "get_bp_self_test",
+      "get_bp_snapshot",
+      "get_bp_transactions_by_signatures",
+      "get_bp_wallet_forensics",
+      "get_bp_wallet_signature_index"
+    ],
+    "_note": "Open edge ve get_bp_health/get_bp_self_test DA DONG — chung ton tai. Handover §3 liet ke thieu 2 tool."
+  }
 }
