@@ -167,7 +167,15 @@
       "0.2598% (09:54:02Z, phi 0.281108 / von 108.185536)",
       "0.2547% (09:57:35Z, phi 0.258052 / von 101.329138)"
     ],
-    "_lead": "Nhieu kha nang la tai khoan phi cua dich vu thuc thi (Definitive). Lan theo no co the dinh danh dich vu — manh moi gan nhat toi cau hoi beneficial owner."
+    "_lead": "Nhieu kha nang la tai khoan phi cua dich vu thuc thi (Definitive). Lan theo no co the dinh danh dich vu — manh moi gan nhat toi cau hoi beneficial owner.",
+    "nhanh_da_dong": {
+      "_ket_luan": "Ggp9SG... la tai khoan phi DUNG CHUNG cua mot dich vu thuc thi (Jupiter integrator fee), KHONG phai dau hieu so huu.",
+      "bang_chung": "Hai vi khac cung tra phi vao do — 8z67cQ3r3BzDeZLv3bHx7cjDr3cm91crcM67cbTn3HGn (416 chu ky tu 16/01/2026) va 47jz4efeuaLHcqq16neqQQYVDH9YYgjpdYKH5QN6NyQa (550 chu ky tu 18/07/2026) — CA HAI deu tra tokenAccounts: [] cho exact BP mint, tuc KHONG nam BP.",
+      "_quy_tac": "TUYET DOI khong dung 'cung tra phi vao Ggp9SG' de mo rong cluster BP. No dinh danh DICH VU, khong dinh danh nguoi huong loi. Cung loai loi ma §7.5 canh bao, chi khac hinh dang.",
+      "_tac_dong_len_BP": "Bang khong. Khong tim them holder BP nao. Concentration giu nguyen.",
+      "_quan_sat_phu": "Ca hai vi deu co pattern bung theo dot giong BYJu (159 lenh ngay 12/09, 102 ngay 03/09, 45 ngay 24/08) — TWAP campaign tren token khac. Dich vu nay co nhieu khach.",
+      "_manh_moi_cross_chain": "47jz4efeu... co memo chua hash 32 byte kieu EVM: 0x8977e54ab7f3846f1f2c16d308ffe5ce96ce30c71ae1958ab978d3abb27e0b0b va 0x61be52d1d730e9e709de8aa22be93308d40978584f6e8fedbdba5bb573979489. Tham chieu bridge/EVM. Chua lien quan BP."
+    }
   },
   "vwap_correction": {
     "_canh_bao": "MCP tinh impliedBpPrice tu tong usdcDelta cua vi, ma tong do DA GOM phi thuc thi ~0.25%. Nen MOI VWAP ghi trong file nay va trong handover la GIA GOP PHI, cao hon gia khop that khoang 0.25%.",
