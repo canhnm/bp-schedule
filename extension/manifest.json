@@ -1,0 +1,32 @@
+{
+  "manifest_version": "0.2",
+  "name": "bp-market",
+  "display_name": "BP Market MCP",
+  "version": "1.0.0",
+  "description": "BP (Backpack / Solana) market snapshot va wallet forensics qua Cloudflare Worker MCP v3.6.",
+  "long_description": "Cau noi stdio sang BP MCP Worker. Gui User-Agent trinh duyet de di qua Cloudflare 1010 browser_signature_banned. Cung cap get_bp_snapshot, get_bp_rpc_health, get_bp_health, get_bp_self_test, get_bp_wallet_signature_index, get_bp_transactions_by_signatures, get_bp_wallet_forensics.",
+  "author": { "name": "Kahn" },
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"],
+      "env": {
+        "BP_MCP_URL": "https://bp-market-mcp.playerpress.workers.dev/mcp",
+        "BP_MCP_UA": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+      }
+    }
+  },
+  "tools": [
+    { "name": "get_bp_snapshot", "description": "Market snapshot BP_USDC theo exact mint" },
+    { "name": "get_bp_rpc_health", "description": "Kiem tra tung Solana RPC endpoint" },
+    { "name": "get_bp_health", "description": "Health check cua Worker" },
+    { "name": "get_bp_self_test", "description": "Self test cua Worker" },
+    { "name": "get_bp_wallet_signature_index", "description": "Index signature nhanh, khong suy luan BUY/SELL" },
+    { "name": "get_bp_transactions_by_signatures", "description": "Parser chon loc theo exact signatures" },
+    { "name": "get_bp_wallet_forensics", "description": "Trace gop owner + BP token accounts" }
+  ],
+  "keywords": ["solana", "backpack", "bp", "forensics"],
+  "license": "MIT"
+}
