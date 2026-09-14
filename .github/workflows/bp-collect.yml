@@ -35,6 +35,8 @@ jobs:
           # Chỉ cần nếu sau này Worker bật auth. Helius key KHÔNG nằm ở đây —
           # nó là Cloudflare Worker secret, đúng handover §3B.
           BP_MCP_TOKEN: ${{ secrets.BP_MCP_TOKEN }}
+          # Dấu hiệu riêng để WAF/Worker nhận ra client hợp lệ.
+          BP_MCP_CLIENT_KEY: ${{ secrets.BP_MCP_CLIENT_KEY }}
         run: python scripts/collect.py
 
       # always() để runlog chứa lỗi vẫn được commit khi bước Collect fail —
