@@ -48,13 +48,18 @@ jobs:
           git config user.email "bp-collector@users.noreply.github.com"
           # add cả thư mục, không chỉ đích danh file: ledger.json có thể chưa
           # tồn tại ở run đầu hoặc khi script thoát sớm.
+          # File sinh tự động thì không merge: đặt index về đúng đỉnh remote,
+          # rồi chỉ stage out/ va state/. Bản của runner luôn thắng, và commit
+          # thành fast-forward nên không bao giờ conflict. KHONG dung
+          # pull --rebase o day - no se dung do tren chinh file minh vua ghi.
+          git fetch origin main
+          git reset --mixed origin/main
           git add -A out/ state/
           if git diff --staged --quiet; then
-            echo "không có thay đổi"
+            echo "khong co thay doi"
           else
             git commit -m "collect $(date -u +%Y-%m-%dT%H:%MZ)"
-            git pull --rebase --autostash origin main || true
-            git push
+            git push origin HEAD:main
           fi
 
       - name: Báo fail nếu collector lỗi
