@@ -1,0 +1,76 @@
+{
+  "started_utc": "2026-09-14T09:48:05Z",
+  "mcp_url": "https://bp-market-mcp.playerpress.workers.dev/mcp",
+  "campaign_from": "2026-09-08T00:00:00Z",
+  "parse_batches": 8,
+  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+  "client_key_set": false,
+  "handshake": {
+    "ok": true,
+    "result": {
+      "protocolVersion": "2024-11-05",
+      "capabilities": {
+        "tools": {
+          "listChanged": true
+        }
+      },
+      "serverInfo": {
+        "name": "BP Backpack Market + Forensics",
+        "version": "3.6.0"
+      }
+    }
+  },
+  "tools_available": [
+    "get_bp_health",
+    "get_bp_rpc_health",
+    "get_bp_self_test",
+    "get_bp_snapshot",
+    "get_bp_transactions_by_signatures",
+    "get_bp_wallet_forensics",
+    "get_bp_wallet_signature_index"
+  ],
+  "steps": [
+    {
+      "step": "tools/list",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "snapshot",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "rpc_health",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "dqjq_index",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "step": "byju_index_new",
+      "ok": true,
+      "note": "17 mới"
+    },
+    {
+      "step": "byju_index_older",
+      "ok": true,
+      "note": "81 mới"
+    },
+    {
+      "step": "parse",
+      "ok": true,
+      "note": "159 sig"
+    }
+  ],
+  "new_signatures": 17,
+  "parsed_this_run": 159,
+  "saw_429": false,
+  "pending_count": 0,
+  "parsed_count": 179,
+  "older_exhausted": false,
+  "finished_utc": "2026-09-14T09:48:40Z"
+}
