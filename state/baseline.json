@@ -1,0 +1,71 @@
+{
+  "_source": "BP_RE_FULL_HANDOVER_2026-09-14 v2",
+  "_role": "Hằng số tĩnh từ handover. Collector KHÔNG ghi file này. Claude đọc để có checkpoint. Người sửa tay khi handover đổi.",
+  "_rule": "UNKNOWN không bao giờ thành fact. Balance delta không tự động là BUY/SELL. Số DERIVED phải giữ nhãn DERIVED.",
+
+  "mint": "BPxxfRCXkUVhig4HS1Lh7kZqV6SPJhzfEk4x6fVBjPCy",
+  "market": "BP_USDC",
+  "position_entry_usd": "0.50433",
+
+  "cluster": {
+    "byju": "BYJuT6vQwqxdjF8yZbV4zbTc6RV4dPgRQTGBCr3ctmV9",
+    "byju_bp_ata": "AJviiPsRgfKH2Rz88sxgJAFF2kr1T72jaaH4tMH6sKuM",
+    "dqjq": "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke",
+    "byju_balance_bp_at_checkpoint": "375152.099704383",
+    "dqjq_balance_bp_at_checkpoint": "1219268.597699059",
+    "cluster_bp_at_checkpoint": "1594420.697403442",
+    "sweep_1_bp": "571858.355685697",
+    "sweep_2_bp": "647410.242013362",
+    "sweep_sum_bp": "1219268.597699059",
+    "_invariant_I1": "dqjq_balance phải == sweep_sum. Lớn hơn = sweep mới. NHỎ HƠN = BP outbound, nghiêm trọng nhất."
+  },
+
+  "campaign_sep13_14": {
+    "parsed_confirmed_buy_at_handover": 140,
+    "parsed_confirmed_sell_at_handover": 0,
+    "_partial_aggregate_20tx_only": {
+      "_scope": "CHỈ 20 transaction retry — KHÔNG phải tổng campaign",
+      "bp": "3948.3682716350304",
+      "usdc": "1968.131728",
+      "vwap": "0.4984671116265939",
+      "price_min": "0.4967347428072599",
+      "price_max": "0.4999743112751785"
+    },
+    "_derived_convergence_target_bp": "54062.7840171278",
+    "_derived_note": "HYPOTHESIS. Giả định BYJu không có BP trước campaign historical và không có RECEIVE/SEND BP khác sau sweep Sep-8. Chưa verify."
+  },
+
+  "historical_campaign": {
+    "bp_bought": "1540357.9133863142",
+    "usdc_spent": "711212.6518919955",
+    "vwap": "0.4617190886035503"
+  },
+
+  "excluded_from_whale_concentration": {
+    "GySFHFS5ZiN4Z5YnyPZcjjxpYcGvD7qHZYVjE9QzMHVH": "reserve/system ~750M, mint+freeze authority",
+    "EyzzXxQcR7NicVhMvHZy5DAeoCrxpCoY11pRneuysJiS": "staking/escrow",
+    "43DbAvKxhXh1oSxkJSqGosNw3HpBnmsWiak6tB5wpecN": "Backpack Exchange/custody",
+    "6qz7THwQvcjF3HyDGLuKaLBUk6EyJKeZXZMWLAeiwfjd": "Meteora BP/USDC LP",
+    "ASTyfSima4LLAdDgoFGkgqoKowG1LZFDr9fAQrg7iaJZ": "MEXC omnibus — BP vào = possible sell-risk, chưa phải verified sale"
+  },
+
+  "p0_smart_money": {
+    "8hH2SVbSDTrvqExVNLxQCp32VasEkqYAoaprWCioGZA1": "~720,000.178 BP. Cụm số PnL wallet-analytics KHÔNG reconcile nội bộ — SOURCE-REPORTED, cấm derive cost basis.",
+    "BA4kkLs7cAzBGcTt6cngEjfbFAg9HeFLPgfDmRjmyqxq": "~194,919.512 BP, 7 buys / 0 sells, avg $0.27455. Số học reconcile trong 0.16%."
+  },
+
+  "supply": {
+    "circulating": "250M",
+    "gysf_reserve": "750M",
+    "active_stake_sep9": "154.06M",
+    "active_stake_pct": "61.6",
+    "pre_ipo_pool_375M": "UNKNOWN scope — không khớp cấu trúc 250M+750M, chưa có định nghĩa nguồn, KHÔNG dùng trong tính dilution"
+  },
+
+  "open_edges": [
+    "Funding gap: campaign historical chi 711,212.65 USDC nhưng chỉ ~250K–500K funding USDC vào BYJu được ghi nhận. Thiếu tối thiểu $211K. Chưa đóng thì không phát biểu về nguồn vốn hay beneficial owner.",
+    "get_bp_health / get_bp_self_test chưa xác minh tồn tại — xem out/latest/_tools.json.",
+    "Whale queue P1/P2 không có timestamp quan sát.",
+    "D7BgNq chưa có full address; một cache cho ~1.8M BP, sẽ là holder phi hệ thống lớn nhất nếu đúng."
+  ]
+}

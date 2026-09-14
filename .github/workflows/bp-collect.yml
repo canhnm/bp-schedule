@@ -1,0 +1,48 @@
+name: BP collect
+
+# Chạy lúc :25 mỗi giờ — sớm hơn scheduled task của Claude (:37) khoảng 12 phút
+# để dữ liệu đã nằm trong repo trước khi Claude đọc.
+# Lưu ý: cron của GitHub Actions có thể trễ vài phút khi hệ thống bận; khoảng
+# đệm 12 phút là để chịu được độ trễ đó.
+on:
+  schedule:
+    - cron: "25 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bp-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect
+        env:
+          BP_MCP_URL: https://bp-market-mcp.playerpress.workers.dev/mcp
+          # Chỉ cần nếu sau này Worker bật auth. Helius key KHÔNG nằm ở đây —
+          # nó là Cloudflare Worker secret, đúng handover §3B.
+          BP_MCP_TOKEN: ${{ secrets.BP_MCP_TOKEN }}
+        run: python scripts/collect.py
+
+      - name: Commit
+        run: |
+          git config user.name  "bp-collector"
+          git config user.email "bp-collector@users.noreply.github.com"
+          git add -A out/ state/ledger.json
+          if git diff --staged --quiet; then
+            echo "không có thay đổi"
+          else
+            git commit -m "collect $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
