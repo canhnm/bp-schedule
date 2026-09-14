@@ -61,6 +61,8 @@
     "pre_ipo_pool_375M": "UNKNOWN scope — không khớp cấu trúc 250M+750M, chưa có định nghĩa nguồn, KHÔNG dùng trong tính dilution"
   },
   "open_edges": [
+    "Verify 150,000 USDC (17/08, CgjmoX->Dqjq) co di tiep sang BYJu khong — can index Dqjq TRUOC 20/08. Neu co, day la mat xich von truoc sweep 31/08.",
+    "Nguon thuong nguon moi: 5tzFkiKscXHK... (gui 10.85M), 2AQdpHJ2Jpc... (gui 150K), 41zCUJsKk6cM... (nhan 10.84M), DuEHFEKmVRD4... (gui 20K). Chua phan loai.",
     "Von mua BP truoc sweep 31/08 nhieu kha nang cung tu CgjmoX. Truy tiep bang ATA USDC cua CgjmoX (65 chu ky, tra cuu duoc het).",
     "DA GIAI: nguon 250.000 USDC vao Dqjq ngay 25/08 = tu CgjmoX. Xem capital_chain_discovered.",
     "Ai cap von cho BYJu mua BP TRUOC sweep 31/08? Von Dqjq da biet khong giai thich duoc. Xem funding_verified_onchain.sharpest_open_question.",
@@ -210,5 +212,26 @@
   "research_sources": {
     "helius_enhanced_tx": "https://api.helius.xyz/v0/addresses/{address}/transactions?api-key=...  GET, goi duoc qua WebFetch -> RE chay duoc KHONG CAN bat desktop. Key nghien cuu free, khac key production trong Cloudflare Worker secret.",
     "_luu_y": "GET-only va di qua lop tom tat. Voi so can chinh xac tuyet doi thi ap dung kiem tra cong-chan-khop-so-rong, hoac doi chieu bang MCP."
+  },
+  "cgjmox_ledger_thang8": {
+    "_nguon": "ATA USDC cua CgjmoX 98U3uhwhA8RftLfURi8C5WthK6m3Pqvb8pNFJStV94YU, 11/08 - 22/08, 20 chu ky parse het",
+    "phat_hien_1_von_truoc_sweep": {
+      "su_kien": "17/08 15:26:00Z CgjmoX -> Dqjq 150,000 USDC",
+      "sig": "5DcZePAFe1bUj7KmaNUcRTcqACAASCygNDZYiLJLGzYvRt17g2L3Fyq6CUivsZMwjKahUBH7HTiVnMsWERGyaNVx",
+      "_y_nghia": "Day la khoan von DAU TIEN tim duoc TRUOC sweep 31/08 — ung vien cho cau hoi 'ai cap von mua BP truoc 31/08'. Nguon truc tiep truoc do: 17/08 15:25:27Z CgjmoX nhan 150,000 USDC tu 2AQdpHJ2JpcEgPiATUXjQxA8QmafFegfQwSLWSprPicm (chi 33 giay truoc khi chuyen di).",
+      "_chua_du": "Sweep 31/08 la 571,858.355685697 BP, o VWAP historical 0.4617 tuong duong ~$264K. 150K chua du, con thieu ~$114K. Phai co nguon khac nua.",
+      "_chua_chung_minh": "CHUA verify 150K nay di tiep tu Dqjq sang BYJu. Phai index Dqjq truoc 20/08."
+    },
+    "phat_hien_2_dong_10_85_trieu": {
+      "su_kien": "20/08 07:36:23Z CgjmoX nhan 10,849,999.7 USDC tu 5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9; 07:44:52Z chuyen 10,840,025.7 sang 41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu. Cach nhau 8 phut.",
+      "_y_nghia": "Lon gap ~20 lan toan bo campaign BP. CgjmoX la ong dan cho dong von rat lon, BP chi la mot nhanh nho. Quy mo that cua mang luoi nay vuot xa pham vi handover.",
+      "_luu_y": "5tzFkiKscXHK... gui -10,906,949.103475928 nhung CgjmoX chi nhan +10,849,999.7 => no phan phoi cho nhieu nguoi nhan trong cung giao dich. Hanh vi kieu distributor/exchange. Cung dia chi nay xuat hien lai 09/09 voi lech 412.70 — cung ly do."
+    },
+    "phat_hien_3_ho_vanity_xac_nhan_voi_Dqjq": {
+      "cap": "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke (that) / Dqjq1YKBLtpP2gZAUepoT9rH1eK3WvEujfMsaYm16Kke (probe)",
+      "_y_nghia": "Trung 4 ky tu DAU va 4 ky tu CUOI. Quy luat ho vanity da xac nhan tren ca Dqjq, khong chi CgjmoX. Dau van tay nay dung duoc de nhan dien dia chi cung chu."
+    },
+    "verify_handover": "22/08 18:47:42Z Dqjq -> CgjmoX 25,000.00281 USDC — khop chinh xac con so trong §7.3.",
+    "node_6rzM_cap_nhat": "6rzMxHRF1nu3nZ6hpAP48H6MVH6zSuyAAJP8MXJNE8mz nhan them 39,779.48831 ngay 22/08. Tong da biet tu CgjmoX: 614,532.50481 USDC. La diem den lap lai, khong phai su kien don le."
   }
 }
