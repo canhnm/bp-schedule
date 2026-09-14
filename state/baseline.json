@@ -61,8 +61,9 @@
     "pre_ipo_pool_375M": "UNKNOWN scope — không khớp cấu trúc 250M+750M, chưa có định nghĩa nguồn, KHÔNG dùng trong tính dilution"
   },
   "open_edges": [
+    "Von mua BP truoc sweep 31/08 nhieu kha nang cung tu CgjmoX. Truy tiep bang ATA USDC cua CgjmoX (65 chu ky, tra cuu duoc het).",
+    "DA GIAI: nguon 250.000 USDC vao Dqjq ngay 25/08 = tu CgjmoX. Xem capital_chain_discovered.",
     "Ai cap von cho BYJu mua BP TRUOC sweep 31/08? Von Dqjq da biet khong giai thich duoc. Xem funding_verified_onchain.sharpest_open_question.",
-    "Nguon 250,000 USDC chay vao Dqjq ngay 25/08 giua 09:20:34 va 11:28:42 — chua co chu ky, can index ATA USDC (extraMints).",
     "Mint E1kvzJNxShvvWTrudokpzuc789vRiDXfXG3duCuY6ooE: 07/09 08:10:31Z Dqjq chuyen 4,341,254.257911 sang CgjmoX, muoi tieng truoc khi cap von BP. Khong co trong handover. Chua xac dinh token gi.",
     "D7BgNq: UNRESOLVED_TRANSIENT, confidence LOW. Historical transient holder candidate (~1.8M BP), full address CHUA duoc chung minh va da bien mat khoi holder snapshot hien tai. KHONG dua vao P1/P2, KHONG tinh nhu whale doc lap. Muon resolve phai lay historical holder snapshot hoac lan theo token-transfer records tai thoi diem snapshot. TUYET DOI khong tu hoan thien dia chi tu prefix.",
     "Whale queue P1/P2 khong co timestamp quan sat.",
@@ -100,7 +101,8 @@
   "tooling_blind_spots": {
     "stable_inflow_invisible": "get_bp_wallet_signature_index chi quet owner + BP token account. Dong stablecoin vao ATA USDC KHONG duoc index. Bang chung: so du USDC cua Dqjq ngay 25/08 di tu 0.001 (09:20:34) len 250000.001 (11:28:42) — +250,000 USDC vao ma khong co chu ky nao trong 11 giao dich duoc index. Da va: them tham so extraMints cho index (chua deploy tai thoi diem ghi).",
     "no_bp_delta_was_empty": "DA SUA 2026-09-14. Truoc do parser tra {signature, action:NO_BP_DELTA} va vut het token delta, timestamp, counterparty — khien §9 stable-capital intent khong co du lieu de chay. Nay tra tokenDeltas (moi mint), counterparties, timestamp, nativeSolDelta, venueHints.",
-    "cex_vs_dex_khong_cong_tru": "executedFlow trong snapshot lay tu api.backpack.exchange = so khop lenh CEX. BYJu mua tren DEX Solana. Lenh BYJu KHONG xuat hien trong tape do. Khong duoc so sanh ty trong giua hai ben."
+    "cex_vs_dex_khong_cong_tru": "executedFlow trong snapshot lay tu api.backpack.exchange = so khop lenh CEX. BYJu mua tren DEX Solana. Lenh BYJu KHONG xuat hien trong tape do. Khong duoc so sanh ty trong giua hai ben.",
+    "workaround_khong_can_deploy": "Khong can cho deploy extraMints: truyen thang dia chi ATA vao tham so address cua get_bp_wallet_signature_index. Tool nhan moi dia chi 32-44 ky tu va index chinh dia chi do."
   },
   "source_caveats": {
     "dexscreener": "KHONG DUNG CHO GIA BP. 2026-09-14 bao priceUsd ~0.3809 cho dung exact mint va dung pool Meteora 6qz7THw..., trong khi CEX bao 0.49881 va token delta on-chain cua BYJu cho 0.4993-0.5026. Lech -24%.",
@@ -118,5 +120,36 @@
       "get_bp_wallet_signature_index"
     ],
     "_note": "Open edge ve get_bp_health/get_bp_self_test DA DONG — chung ton tai. Handover §3 liet ke thieu 2 tool."
+  },
+  "capital_chain_discovered": {
+    "_at": "2026-09-14",
+    "_headline": "CgjmoX CAP VON CHO Dqjq. Dao nguoc mo hinh trong handover §9 (\"track Dqjq va CgjmoX nhu hai master-like wallet rieng\") — chung khong ngang hang, CgjmoX o thuong nguon.",
+    "evidence": [
+      {
+        "utc": "2026-08-25T09:17:06Z",
+        "from": "CgjmoXmBrFAg4GPFCHmNYDf28CSPs84cDCwT6MNgTbsx",
+        "to": "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke",
+        "usdc": "4999.7011",
+        "sig": "2LKXsXpKSc18Kg67xTwgayVWNpN5Up4BM5nHvTPEdWu4UAYG24oPhtxNBm2c6Gki5ysEKtiBxR1pLDYW4hu8PFf"
+      },
+      {
+        "utc": "2026-08-25T11:28:34Z",
+        "from": "CgjmoXmBrFAg4GPFCHmNYDf28CSPs84cDCwT6MNgTbsx",
+        "to": "DqjqYnihbh64EXpSxtdwpDbYEybzdReXqtvSMhwK6Kke",
+        "usdc": "250000",
+        "sig": "S6X65yJNxdvZfX3718wfnv3vUjdEMxkASA5C1QDqrZ9145Jp7iN9PBDMcgnWFvotodGi6gUtzv2r8APDT5humra"
+      }
+    ],
+    "chain": "CgjmoX (von) -> Dqjq (phan bo) -> BYJu (Definitive executor) -> DEX -> token mua duoc quay ve Dqjq -> CgjmoX",
+    "return_leg_evidence": "25/08 Dqjq->CgjmoX 40,824,094.42989554 DUPE; 22/08 Dqjq->CgjmoX 25,000.00281 USDC (handover §7.3); 07/09 08:10:31Z Dqjq->CgjmoX 4,341,254.257911 mint E1kvzJNx...",
+    "confidence": "Quan he van hanh CgjmoX->Dqjq: HIGH, co huong ro rang (von xuong, token len). Beneficial owner van UNKNOWN — day la dong von thuc su hai chieu, KHAC HAN lap luan gas-distributor ma §7.5 canh bao khong chung minh duoc so huu.",
+    "_how_found": "Suy ra dia chi ATA USDC bang ProgramDerivedAddress roi index thang ATA do, thay vi index owner. Cong thuc da tu kiem chung: suy ra dung ca hai BP ATA da biet (Dqjq -> GnyjGeX3..., BYJu -> AJviiPsR...).",
+    "next_lead": "ATA USDC cua CgjmoX = 98U3uhwhA8RftLfURi8C5WthK6m3Pqvb8pNFJStV94YU chi co 65 chu ky tu 01/08 (12 ngay co hoat dong) — DAY la so cai von, tra cuu duoc het. Trai lai ATA USDC cua BYJu co >5.000 chu ky chi trong 28-31/08 vi moi swap deu cham vao no, khong kinh te de truy. Dang chu y: 08/09 co 9 va 09/09 co 11 giao dich, ngay SAU sweep 2."
+  },
+  "derived_ata": {
+    "_note": "Suy ra bang ProgramDerivedAddress, da kiem chung voi hai BP ATA on-chain.",
+    "dqjq_usdc": "Gau37ZyfXMG3A55zvt2K75izqYusTB4RisWuZRvAjsRD",
+    "byju_usdc": "3hAQMadipKixDM8PH86NqN7L6xF4ZQkyro93tAV97UGg",
+    "cgjmox_usdc": "98U3uhwhA8RftLfURi8C5WthK6m3Pqvb8pNFJStV94YU"
   }
 }
