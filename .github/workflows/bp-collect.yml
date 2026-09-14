@@ -28,6 +28,8 @@ jobs:
           python-version: "3.12"
 
       - name: Collect
+        id: collect
+        continue-on-error: true
         env:
           BP_MCP_URL: https://bp-market-mcp.playerpress.workers.dev/mcp
           # Chỉ cần nếu sau này Worker bật auth. Helius key KHÔNG nằm ở đây —
@@ -35,14 +37,26 @@ jobs:
           BP_MCP_TOKEN: ${{ secrets.BP_MCP_TOKEN }}
         run: python scripts/collect.py
 
+      # always() để runlog chứa lỗi vẫn được commit khi bước Collect fail —
+      # mất log là mất luôn khả năng chẩn đoán từ xa.
       - name: Commit
+        if: always()
         run: |
           git config user.name  "bp-collector"
           git config user.email "bp-collector@users.noreply.github.com"
-          git add -A out/ state/ledger.json
+          # add cả thư mục, không chỉ đích danh file: ledger.json có thể chưa
+          # tồn tại ở run đầu hoặc khi script thoát sớm.
+          git add -A out/ state/
           if git diff --staged --quiet; then
             echo "không có thay đổi"
           else
             git commit -m "collect $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase --autostash origin main || true
             git push
           fi
+
+      - name: Báo fail nếu collector lỗi
+        if: steps.collect.outcome == 'failure'
+        run: |
+          echo "Bước Collect fail — xem out/runlog.json vừa commit."
+          exit 1

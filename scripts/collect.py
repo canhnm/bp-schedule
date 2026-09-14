@@ -250,9 +250,14 @@ def main():
             "clientInfo": {"name": "bp-compass-collector", "version": "2.0"},
         },
     )
-    run["handshake"] = {"ok": ok, "result": res if ok else res}
+    run["handshake"] = {"ok": ok, "result": res}
     if not ok:
         log(f"HANDSHAKE FAILED: {res}")
+        # Ghi cả ledger lẫn runlog trước khi thoát: workflow commit theo thư mục,
+        # và ledger vắng mặt từng làm hỏng bước commit.
+        led["last_run_utc"] = utcnow()
+        led["last_error"] = "handshake failed"
+        save_ledger(led)
         run["finished_utc"] = utcnow()
         RUNLOG_PATH.write_text(json.dumps(run, indent=2, ensure_ascii=False))
         return 0  # commit runlog để Claude thấy lỗi thật, không im lặng
