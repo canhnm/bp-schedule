@@ -52,14 +52,21 @@ jobs:
           # rồi chỉ stage out/ va state/. Bản của runner luôn thắng, và commit
           # thành fast-forward nên không bao giờ conflict. KHONG dung
           # pull --rebase o day - no se dung do tren chinh file minh vua ghi.
-          git fetch origin main
-          git reset --mixed origin/main
-          git add -A out/ state/
+          # Du lieu sinh tu dong di vao branch "data", KHONG phai main.
+          # main chi chua code nguoi sua -> may local khong bao gio bi bo lai sau.
+          git fetch origin data || true
+          if git show-ref --verify --quiet refs/remotes/origin/data; then
+            git reset --mixed origin/data
+          else
+            git checkout --orphan data
+            git reset
+          fi
+          git add -A out/ state/ledger.json
           if git diff --staged --quiet; then
             echo "khong co thay doi"
           else
             git commit -m "collect $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push origin HEAD:main
+            git push origin HEAD:data
           fi
 
       - name: Báo fail nếu collector lỗi
