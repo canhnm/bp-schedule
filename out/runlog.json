@@ -1,5 +1,5 @@
 {
-  "started_utc": "2026-09-16T06:13:53Z",
+  "started_utc": "2026-09-16T11:51:27Z",
   "mcp_url": "https://bp-market-mcp.playerpress.workers.dev/mcp",
   "campaign_from": "2026-09-08T00:00:00Z",
   "parse_batches": 8,
@@ -37,8 +37,8 @@
     },
     {
       "step": "snapshot",
-      "ok": false,
-      "note": "{'transport_error': 'URLError', 'detail': '<urlopen error [Errno 104] Connection reset by peer>'}"
+      "ok": true,
+      "note": ""
     },
     {
       "step": "rpc_health",
@@ -53,7 +53,7 @@
     {
       "step": "byju_index_new",
       "ok": true,
-      "note": "83 mới"
+      "note": "81 mới"
     },
     {
       "step": "byju_index_older",
@@ -66,7 +66,7 @@
       "note": "160 sig"
     }
   ],
-  "new_signatures": 83,
+  "new_signatures": 81,
   "parsed_this_run": 160,
   "saw_429": false,
   "aggregate": {
@@ -74,8 +74,8 @@
     "buy": 60,
     "sell": 0
   },
-  "pending_count": 145,
+  "pending_count": 143,
   "parsed_count": 180,
   "older_exhausted": false,
-  "finished_utc": "2026-09-16T06:14:26Z"
+  "finished_utc": "2026-09-16T11:52:00Z"
 }
