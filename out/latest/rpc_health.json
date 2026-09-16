@@ -1,12 +1,12 @@
 {
   "tool": "get_bp_rpc_health",
-  "fetched_utc": "2026-09-16T20:16:53Z",
+  "fetched_utc": "2026-09-16T23:04:10Z",
   "ok": true,
   "result": {
     "content": [
       {
         "type": "text",
-        "text": "{\"ok\":true,\"build\":{\"version\":\"3.6.0\",\"id\":\"fast-signature-index-selective-parser-20260913\"},\"request\":{\"hostname\":\"bp-market-mcp.playerpress.workers.dev\",\"pathname\":\"/mcp\"},\"runtime\":{\"hasSolanaRpcUrl\":true,\"hasSolanaRpcUrls\":false,\"configuredOverrides\":1,\"configuredEndpoints\":[\"https://mainnet.helius-rpc.com\"],\"fallbackDefaultsEnabled\":true,\"parseWarnings\":[],\"batchSize\":20},\"configuredOverrides\":1,\"fallbackDefaultsEnabled\":true,\"probes\":[{\"endpoint\":\"https://mainnet.helius-rpc.com\",\"ok\":true,\"httpStatus\":200,\"latencyMs\":53,\"result\":\"ok\",\"error\":null},{\"endpoint\":\"https://solana-rpc.publicnode.com\",\"ok\":true,\"httpStatus\":200,\"latencyMs\":78,\"result\":\"ok\",\"error\":null},{\"endpoint\":\"https://solana-mainnet.public.blastapi.io\",\"ok\":false,\"httpStatus\":530,\"latencyMs\":82,\"result\":null,\"error\":\"error code: 1016\"},{\"endpoint\":\"https://api.mainnet.solana.com\",\"ok\":false,\"httpStatus\":403,\"latencyMs\":153,\"result\":null,\"error\":{\"code\":403,\"message\":\"Your IP or provider is blocked from this endpoint\"}},{\"endpoint\":\"https://api.mainnet-beta.solana.com\",\"ok\":false,\"httpStatus\":403,\"latencyMs\":143,\"result\":null,\"error\":{\"code\":403,\"message\":\"Your IP or provider is blocked from this endpoint\"}}]}"
+        "text": "{\"ok\":true,\"build\":{\"version\":\"3.6.0\",\"id\":\"fast-signature-index-selective-parser-20260913\"},\"request\":{\"hostname\":\"bp-market-mcp.playerpress.workers.dev\",\"pathname\":\"/mcp\"},\"runtime\":{\"hasSolanaRpcUrl\":true,\"hasSolanaRpcUrls\":false,\"configuredOverrides\":1,\"configuredEndpoints\":[\"https://mainnet.helius-rpc.com\"],\"fallbackDefaultsEnabled\":true,\"parseWarnings\":[],\"batchSize\":20},\"configuredOverrides\":1,\"fallbackDefaultsEnabled\":true,\"probes\":[{\"endpoint\":\"https://mainnet.helius-rpc.com\",\"ok\":true,\"httpStatus\":200,\"latencyMs\":14,\"result\":\"ok\",\"error\":null},{\"endpoint\":\"https://solana-rpc.publicnode.com\",\"ok\":true,\"httpStatus\":200,\"latencyMs\":16,\"result\":\"ok\",\"error\":null},{\"endpoint\":\"https://solana-mainnet.public.blastapi.io\",\"ok\":false,\"httpStatus\":530,\"latencyMs\":32,\"result\":null,\"error\":\"error code: 1016\"},{\"endpoint\":\"https://api.mainnet.solana.com\",\"ok\":false,\"httpStatus\":403,\"latencyMs\":69,\"result\":null,\"error\":{\"code\":403,\"message\":\"Your IP or provider is blocked from this endpoint\"}},{\"endpoint\":\"https://api.mainnet-beta.solana.com\",\"ok\":false,\"httpStatus\":403,\"latencyMs\":59,\"result\":null,\"error\":{\"code\":403,\"message\":\"Your IP or provider is blocked from this endpoint\"}}]}"
       }
     ]
   }
