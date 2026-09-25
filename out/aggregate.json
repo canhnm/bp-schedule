@@ -1,15 +1,16 @@
 {
-  "computed_utc": "2026-09-25T18:46:08Z",
+  "computed_utc": "2026-09-25T22:34:09Z",
   "source_files": 9,
   "unique_signatures": 180,
   "action_counts": {
-    "BUY": 180
+    "BUY": 100,
+    "RPC_ERROR": 80
   },
   "buy": {
-    "count": 180,
-    "bp_total": "35391.19678193302",
-    "usdc_total": "17525.203291",
-    "vwap_gop_phi": "0.4951853818050738",
+    "count": 100,
+    "bp_total": "19453.415175662027",
+    "usdc_total": "9754.976146999998",
+    "vwap_gop_phi": "0.5014531412049619",
     "price_min": "0.47803606980330243",
     "price_max": "0.5220841190791994"
   },
@@ -17,12 +18,12 @@
     "count": 0
   },
   "venue_hits": {
-    "Raydium CLMM": 123,
-    "Meteora DLMM": 72,
-    "Jupiter v6": 120
+    "Raydium CLMM": 66,
+    "Meteora DLMM": 37,
+    "Jupiter v6": 65
   },
   "window": {
-    "oldest": "2026-09-13T04:38:32.000Z",
+    "oldest": "2026-09-13T07:10:49.000Z",
     "newest": "2026-09-14T04:55:54.000Z"
   },
   "caveat": "VWAP GOP PHI (~0.25% phi thuc thi nam trong quoteAmount). Chua chac phu het campaign neu older_exhausted=false."
