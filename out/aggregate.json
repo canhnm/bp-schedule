@@ -1,16 +1,16 @@
 {
-  "computed_utc": "2026-09-27T14:12:15Z",
+  "computed_utc": "2026-09-27T18:33:17Z",
   "source_files": 9,
   "unique_signatures": 180,
   "action_counts": {
-    "BUY": 120,
-    "RPC_ERROR": 60
+    "BUY": 140,
+    "RPC_ERROR": 40
   },
   "buy": {
-    "count": 120,
-    "bp_total": "23444.341305750015",
-    "usdc_total": "11681.093531000002",
-    "vwap_gop_phi": "0.4982478875674391",
+    "count": 140,
+    "bp_total": "27522.035043434065",
+    "usdc_total": "13661.813509999996",
+    "vwap_gop_phi": "0.4963954696096972",
     "price_min": "0.47803606980330243",
     "price_max": "0.5220841190791994"
   },
@@ -18,9 +18,9 @@
     "count": 0
   },
   "venue_hits": {
-    "Raydium CLMM": 82,
-    "Meteora DLMM": 46,
-    "Jupiter v6": 75
+    "Raydium CLMM": 99,
+    "Meteora DLMM": 52,
+    "Jupiter v6": 89
   },
   "window": {
     "oldest": "2026-09-13T07:10:49.000Z",
