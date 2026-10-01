@@ -65,6 +65,53 @@
       }
     },
     {
+      "name": "get_bp_staking_flows",
+      "title": "Verify bidirectional BP escrow flows",
+      "description": "Verify BP escrow inflows and outflows from the exact staking token account with signatures, counterparties, balance and pagination. Explicitly distinguishes escrow movements from unverified user stake/unstake requests and pending maturities.",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "fromTime": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          },
+          "toTime": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          },
+          "pageSize": {
+            "default": 100,
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 1000
+          },
+          "maxPages": {
+            "default": 2,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "before": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "fromTime"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
       "name": "get_bp_wallet_forensics",
       "title": "Trace BP wallet buys, sells and transfers",
       "description": "Direct Solana-RPC forensic trace for an exact wallet and exact BP mint. Scans owner plus current BP token accounts, batches getTransaction calls to bound Cloudflare subrequests, separates BUY/SELL from RECEIVE/SEND, derives stable execution prices, detects Jupiter/Raydium/Meteora, adds parsed BP-transfer counterparties for RECEIVE/SEND, exposes signature/parse diagnostics, and supports older-history pagination without skipping unprocessed batches.",
@@ -101,7 +148,7 @@
     {
       "name": "get_bp_wallet_signature_index",
       "title": "Index BP wallet signatures quickly",
-      "description": "Fast first-stage history discovery for a BP wallet. Scans the owner, current exact-BP token accounts, and optionally token accounts of extra mints via extraMints (e.g. USDC EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v to surface stablecoin funding, which the BP-only scope hides) with up to 1,000 signatures per RPC page, supports multi-page/date-bounded indexing, returns per-source cursors and daily counts, and intentionally makes no BUY/SELL inference.",
+      "description": "Fast first-stage history discovery for a BP wallet. Scans the owner plus current exact-BP token accounts with up to 1,000 signatures per RPC page, supports multi-page/date-bounded indexing, returns per-source cursors and daily counts, and intentionally makes no BUY/SELL inference.",
       "inputSchema": {
         "type": "object",
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -161,15 +208,6 @@
             "type": "integer",
             "minimum": 20,
             "maximum": 5000
-          },
-          "extraMints": {
-            "maxItems": 6,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "minLength": 32,
-              "maxLength": 44
-            }
           }
         }
       },
