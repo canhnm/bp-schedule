@@ -1,5 +1,5 @@
 {
-  "started_utc": "2026-10-10T01:02:29Z",
+  "started_utc": "2026-10-10T07:20:43Z",
   "mcp_url": "https://bp-market-mcp.playerpress.workers.dev/mcp",
   "campaign_from": "2026-09-08T00:00:00Z",
   "parse_batches": 8,
@@ -78,5 +78,5 @@
   "pending_count": 143,
   "parsed_count": 180,
   "older_exhausted": false,
-  "finished_utc": "2026-10-10T01:03:07Z"
+  "finished_utc": "2026-10-10T07:21:19Z"
 }
